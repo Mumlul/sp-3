@@ -121,20 +121,29 @@ public:
     }
 
     void remove_duplicates() {
-        Node* node = head;
-        Node* next = node->next;
-        while (next != nullptr)
-        {
-            if (node->data == next->data)
-            {
-                node->next = next->next;
-                delete next;
-                next = node->next;
+        if (!head || !(head)->next) {
+            return; 
+        }
+
+        Node* current = head;
+
+        while (current) {
+            Node* runner = current->next; 
+            while (runner) {
+                if (runner->data == current->data) {
+                    Node* toDelete = runner;
+                    if (runner->prev) {
+                        runner->prev->next = runner->next;
+                    }
+                    if (runner->next) {
+                        runner->next->prev = runner->prev;
+                    }
+                    runner = runner->next; 
+                    delete toDelete; 
+                }
+                else {
+                    runner = runner->next; 
             }
-            else
-            {
-                node = next;
-                next = next->next;
             }
         }
     }
