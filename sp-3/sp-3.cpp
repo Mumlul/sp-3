@@ -40,7 +40,7 @@ public:
 
     void push_back(int value) {
 
-        /*Node* node = new Node(value);
+        Node* node = new Node(value);
         if (tail == NULL) {
             head = node;
             tail = node;
@@ -49,15 +49,8 @@ public:
             tail->next = node;
             node->prev = tail;
             tail = node;
-        }*/
-        Node* ptr = new Node(value);
-
-        ptr->prev = tail;
-        if (tail != NULL)
-            tail->next = ptr;
-        if (head == NULL)
-            head = ptr;
-        tail = ptr;
+        }
+        
 
 
     }
@@ -143,8 +136,9 @@ public:
                 }
                 else {
                     runner = runner->next; 
+                }
             }
-            }
+            current = current->next;
         }
     }
 
@@ -211,6 +205,7 @@ int main()
             return 0;
         default:
             std::cout << "Неверный выбор. Пожалуйста, попробуйте снова." << std::endl;
+            return 0;
         }
     }
 
